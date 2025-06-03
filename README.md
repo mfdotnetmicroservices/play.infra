@@ -1,4 +1,4 @@
 # Play Infra
 
-Play EconomyInfrastructure components
+Play Economy Infrastructure components
 
