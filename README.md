@@ -39,3 +39,19 @@ az group create --name $appname --location eastus
 appname="playeconomy"
 az group create --name "$appname" --location eastus
 ```
+
+
+## Creating the Cosmos DB account
+### For PC
+```powershell
+$app_cosmosdb_account="playeconomy-cosmosdb-account"
+$appname="playeconomy"
+az cosmosdb create --name $app_cosmosdb_account --resource-group $appname --kind MongoDB
+```
+
+### For Mac
+```bash
+app_cosmosdb_account="playeconomy-cosmosdb-account"
+appname="playeconomy"
+az cosmosdb create --name $app_cosmosdb_account --resource-group $appname --kind MongoDB
+```
