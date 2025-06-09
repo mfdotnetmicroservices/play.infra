@@ -55,3 +55,21 @@ app_cosmosdb_account="playeconomy-cosmosdb-account"
 appname="playeconomy"
 az cosmosdb create --name $app_cosmosdb_account --resource-group $appname --kind MongoDB
 ```
+
+
+## Creating the Service Bus namespace
+### For windows
+```powershell 
+
+az servicebus namespace create --name $appname --resource-group $appname --sku Standard
+
+```
+
+### For mac
+```bash
+
+appnamenamespace="playeconomy-servicebus-namespace"
+appname="playeconomy"
+az servicebus namespace create --name "$appnamenamespace" --resource-group "$appname" --sku Standard
+
+```
