@@ -73,3 +73,20 @@ appname="playeconomy"
 az servicebus namespace create --name "$appnamenamespace" --resource-group "$appname" --sku Standard
 
 ```
+
+
+## Creating the Container Registry 
+### PC
+```powershell
+$appnameAcr ="playeconomyacr"    
+$appname="playeconomy"
+az acr create --name $appnameAcr --resource-group $appname --sku Basic
+
+```
+
+### Mac
+```bash
+appnameAcr="playeconomyacr"    
+appname="playeconomy"
+az acr create --name $appnameAcr --resource-group $appname --sku Basic
+```
