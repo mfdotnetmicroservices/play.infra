@@ -90,3 +90,27 @@ appnameAcr="playeconomyacr"
 appname="playeconomy"
 az acr create --name $appnameAcr --resource-group $appname --sku Basic
 ```
+
+## Creating the AKS cluster 
+### For Windows
+
+```powershell
+$appnameAcr="playeconomyacr"   
+$appnameRg="playeconomy"
+$appnamecluster = "playeconomy_cluster"
+az aks create -n $appnamecluster -g $appnameRg --node-vm-size Standard_B2s --node-count 2 --attach-acr $appnameAcr --enable-oidc-issuer --enable-workload-identity --generate-ssh-keys
+
+
+az aks get-credentials --name $appnamecluster --resource-group $appnameRg
+```
+
+### For mac
+```bash
+appnameAcr="playeconomyacr"
+appnameRg="playeconomy"
+appnamecluster="playeconomy_cluster"
+az aks create -n "$appnamecluster" -g "$appnameRg" --node-vm-size Standard_B2s --node-count 2 --attach-acr "$appnameAcr" --enable-oidc-issuer --enable-workload-identity --generate-ssh-keys
+
+
+az aks get-credentials --name "$appnamecluster" --resource-group "$appnameRg"
+```
