@@ -114,3 +114,21 @@ az aks create -n "$appnamecluster" -g "$appnameRg" --node-vm-size Standard_B2s -
 
 az aks get-credentials --name "$appnamecluster" --resource-group "$appnameRg"
 ```
+
+## Creating the Azure Key Vault
+### For Windows
+
+```powershell 
+$appnamekv="playeconomy-key-vault"
+$appnameRg="playeconomy"
+az keyvault create -n $appnamekv -g $appnameRg 
+```
+
+### For Mac
+
+```bash
+appnamekv="playeconomy-key-vault"
+appnameRg="playeconomy"
+az keyvault create -n "$appnamekv" -g "$appnameRg"
+
+```
