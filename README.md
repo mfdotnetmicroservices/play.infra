@@ -185,3 +185,15 @@ namespace="emissary"
 kubectl apply -f ./emissary-ingress/listener.yaml -n "$namespace"
 kubectl apply -f ./emissary-ingress/mappings.yaml -n "$namespace"
 ```
+
+## Installing cert-manager
+```powershell
+
+namespace="emissary"
+
+helm repo add jetstack https://charts.jetstack.io --force-update
+helm repo update 
+
+helm install cert-manager jetstack/cert-manager --version v1.18.0 --set crds.enabled=true --namespace "$namespace"
+  
+```
