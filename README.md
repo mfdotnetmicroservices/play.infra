@@ -169,3 +169,19 @@ kubectl -n "$namespace" wait --for condition=available --timeout=90s deploy -lap
 
 
 ```
+
+
+## Configuring Emissary-ingress routing
+```powershell 
+
+$namespace="emissary"
+
+kubectl apply -f .\emissary-ingress\listener.yaml -n $namespace 
+```
+
+```bash
+namespace="emissary"
+
+kubectl apply -f ./emissary-ingress/listener.yaml -n "$namespace"
+kubectl apply -f ./emissary-ingress/mappings.yaml -n "$namespace"
+```
