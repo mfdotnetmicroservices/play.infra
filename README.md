@@ -132,3 +132,40 @@ appnameRg="playeconomy"
 az keyvault create -n "$appnamekv" -g "$appnameRg"
 
 ```
+
+## Installing Emissary-ingress
+```powershell 
+$namespace_dns_name="playeconomy_dns_service"
+helm repo add datawire https://app.getambassador.io
+helm repo update
+
+kubectl create namespace emissary && \
+kubectl apply -f https://app.getambassador.io/yaml/emissary/3.9.1/emissary-crds.yaml
+
+kubectl wait --timeout=90s --for=condition=available deployment emissary-apiext -n emissary-system
+
+$namespace="emissary"
+helm install emissary-ingress datawire/emissary-ingress --set service.annotations."service\.beta\.kubernetes\.io/azure-dns-label-name"= --namespace $namespace_dns_name --create-namespace
+
+kubectl -lapp.kubernetes.io/instance=emissary-ingress deploy --timeout=90s --for condition=available -n $namespace wait
+```
+
+```bash
+
+
+namespace_dns_name="playeconomy-dns-service"
+helm repo add datawire https://app.getambassador.io
+helm repo update
+
+kubectl create namespace emissary && \
+kubectl apply -f https://app.getambassador.io/yaml/emissary/3.9.1/emissary-crds.yaml
+
+kubectl wait --timeout=90s --for=condition=available deployment/emissary-apiext -n emissary-system
+
+namespace="emissary"
+helm install emissary-ingress datawire/emissary-ingress --set service.annotations."service\.beta\.kubernetes\.io/azure-dns-label-name"="$namespace_dns_name" --namespace "$namespace" --create-namespace
+
+kubectl -n "$namespace" wait --for condition=available --timeout=90s deploy -lapp.kubernetes.io/instance=emissary-ingress
+
+
+```
