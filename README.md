@@ -197,3 +197,17 @@ helm repo update
 helm install cert-manager jetstack/cert-manager --version v1.18.0 --set crds.enabled=true --namespace "$namespace"
   
 ```
+
+## Creating the cluster issuer
+```bash
+namespace="emissary"
+kubectl apply -f ./cert-manager/cluster-issuer.yaml -n "$namespace"
+kubectl apply -f ./cert-manager/acme-challenge.yaml -n "$namespace"
+```
+
+
+# Creating the tls certificate 
+```bash
+namespace="emissary"
+kubectl apply -f ./emissary-ingress/tls-certificate.yaml -n "$namespace"
+```
