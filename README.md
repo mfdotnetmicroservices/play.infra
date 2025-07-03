@@ -247,3 +247,30 @@ helm registry login "$appnameAcr.azurecr.io" --username "$helmUser" --password "
 helm push microservice-0.1.0.tgz oci://$appnameAcr.azurecr.io/helm
 
 ```
+
+
+## Create GitHub service principal
+```powershell 
+$appId = az ad sp create-for-rbac -n "GitHub" --query appId --output tsv 
+$subId = "[SUBSCRIPTION ID HERE]"
+
+# az role assignment create --assignee $appId --role "ArcPush" --resource-group $appname
+az role assignment create --assignee "$appId" --role "AcrPush" --scope "/subscriptions/$subId/resourceGroups/$appname"
+az role assignment create --assignee $appId --role "Azure Kubernetes Service Cluster User Role"  --scope "/subscriptions/$subId/resourceGroups/$appname"
+az role assignment create --assignee $appId --role "Azure Kubernetes Service Contributor Role"  --scope "/subscriptions/$subId/resourceGroups/$appname"
+```
+
+```bash
+
+appname="playeconomy"
+appId=$(az ad sp create-for-rbac -n "GitHub" --query appId --output tsv)
+subId="[SUBSCRIPTION ID HERE]"
+
+az role assignment create --assignee "$appId" --role "AcrPush" --scope "/subscriptions/$subId/resourceGroups/$appname"
+
+az role assignment create --assignee "$appId" --role "Azure Kubernetes Service Cluster User Role" --scope "/subscriptions/$subId/resourceGroups/$appname"
+
+
+az role assignment create --assignee "$appId" --role "Azure Kubernetes Service Contributor Role" --scope "/subscriptions/$subId/resourceGroups/$appname"
+
+```
