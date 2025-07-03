@@ -264,7 +264,7 @@ az role assignment create --assignee $appId --role "Azure Kubernetes Service Con
 
 appname="playeconomy"
 appId=$(az ad sp create-for-rbac -n "GitHub" --query appId --output tsv)
-subId="[SUBSCRIPTION ID HERE]"
+subId="[AZURE SUBSCRIPTION ID HERE]"
 
 az role assignment create --assignee "$appId" --role "AcrPush" --scope "/subscriptions/$subId/resourceGroups/$appname"
 
